@@ -95,7 +95,7 @@ export const UserHeader = () => {
 								{user.isAdmin && (
 									<a
 										className="user_header_link"
-										to="/manage"
+										href="/manage"
 									>
 										Админ панель
 									</a>
