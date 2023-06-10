@@ -39,14 +39,14 @@ export const Login = () => {
 						className="auth_input"
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						placeholder="enter your email"
+						placeholder="введите свой эмейл"
 					/>
 					<input
 						type="password"
 						className="auth_input"
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						placeholder="enter your password"
+						placeholder="введите свой пароль"
 					/>
 					<button className="auth_button" type="submit">
 						войти
