@@ -1,0 +1,87 @@
+import { useContext, useState, useEffect } from 'react'
+import { axios } from 'api/axios'
+import { MainContext } from 'providers/MainProvider'
+import { useIdLocation } from 'hooks/useIdLocation'
+import { Link } from 'react-router-dom'
+
+export const UserCourse = () => {
+	const { user } = useContext(MainContext)
+	const [isCompleted, setIsCompleted] = useState(false)
+	const courseId = useIdLocation()
+	const [isLoading, setIsLoading] = useState(true)
+	const [course, setCourse] = useState({})
+	useEffect(() => {
+		const getCourseById = async () => {
+			try {
+				const data = await axios.get(`/course/${courseId}`)
+				setCourse(data.data)
+				setIsCompleted(data.data.userCompleted.includes(user._id))
+			} catch (error) {
+				console.log(error)
+			} finally {
+				setIsLoading(false)
+			}
+		}
+
+		getCourseById()
+	}, [])
+
+	const completeHandler = async () => {
+		setIsCompleted(true)
+		await axios.post('course/complete', {
+			_id: course._id,
+		})
+	}
+
+	return (
+		<>
+			{isLoading ? null : (
+				<section>
+					<div className="container">
+						<div className="course_wrapper">
+							<p className="course_title">
+								Курс "{course.title}"
+							</p>
+							<p className="course_text">{course.text}</p>
+						</div>
+						<p className="course_tests_title">
+							Тесты по данному курсу
+						</p>
+						<div className="table">
+							<div className="table_head">
+								<p className="table_number head_item">#</p>
+								<p className="table_title head_item">
+									Название теста
+								</p>
+							</div>
+							{course.tests.map(({ title, _id }, i) => {
+								return (
+									<div key={title} className="table_item">
+										<p className="table_number">{i + 1}.</p>
+										<Link
+											to={`/tests/${_id}`}
+											className="table_title"
+										>
+											{title}
+										</Link>
+									</div>
+								)
+							})}
+						</div>
+						{!isCompleted && (
+							<>
+								<br />
+								<button
+									className="admin_table_button"
+									onClick={completeHandler}
+								>
+									Я прошел курс
+								</button>
+							</>
+						)}
+					</div>
+				</section>
+			)}
+		</>
+	)
+}
