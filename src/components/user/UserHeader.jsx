@@ -88,7 +88,7 @@ export const UserHeader = () => {
 								</Link>
 								<Link
 									className="user_header_link"
-									href="/profile"
+									to="/profile"
 								>
 									Профиль
 								</Link>
