@@ -48,7 +48,7 @@ export const UserHeader = () => {
 								{user.isAdmin && (
 									<a
 										className="user_header_link"
-										to="/manage"
+										href="/manage"
 									>
 										Админ панель
 									</a>
@@ -88,7 +88,7 @@ export const UserHeader = () => {
 								</Link>
 								<Link
 									className="user_header_link"
-									to="/profile"
+									href="/profile"
 								>
 									Профиль
 								</Link>
