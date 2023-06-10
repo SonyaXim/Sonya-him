@@ -46,12 +46,12 @@ export const UserHeader = () => {
 									Профиль
 								</Link>
 								{user.isAdmin && (
-									<Link
+									<a
 										className="user_header_link"
 										to="/manage"
 									>
 										Админ панель
-									</Link>
+									</a>
 								)}
 							</nav>
 						</div>
@@ -93,12 +93,12 @@ export const UserHeader = () => {
 									Профиль
 								</Link>
 								{user.isAdmin && (
-									<Link
+									<a
 										className="user_header_link"
 										to="/manage"
 									>
 										Админ панель
-									</Link>
+									</a>
 								)}
 							</nav>
 							<div className="user_header_info_wrapper">
